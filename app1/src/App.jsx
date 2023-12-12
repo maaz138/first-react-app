@@ -1,38 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-const func = (props) => {
-  let result = props.fName + props.lName;
-  return <h1>name= {result}</h1>;
-};
 function App() {
-  const [count, setCount] = useState(0);
+  // const [name, setName] = useState();
+  // const [email, setEmail] = useState();
+  // const [roll, setRoll] = useState();
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    roll: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted with values", name, email, roll);
+  };
+  useEffect(() => console.log(name, email, roll), [name, email, roll]);
   return (
     <>
-      <div>
-        <func fName={"Maaz"} lName={"Hassan"} />
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="App">
+        <form>
+          <label>Name:</label>
+          <br />
+          <input
+            type="text"
+            name="fname"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+          <label>Email:</label>
+          <br />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          <label>Roll No:</label>
+          <br />
+          <input
+            type="text"
+            name="rollno"
+            value={roll}
+            onChange={(e) => setRoll(e.target.value)}
+          />
+          <br />
+          <br />
+          <button onClick={handleSubmit}>Submit</button>
+        </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
