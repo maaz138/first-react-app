@@ -13,48 +13,54 @@ function App() {
     email: "",
     roll: "",
   });
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted with values", name, email, roll);
+    console.log("Form submitted with values", formData);
   };
-  useEffect(() => console.log(name, email, roll), [name, email, roll]);
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
   return (
-    <>
-      <div className="App">
-        <form>
-          <label>Name:</label>
-          <br />
-          <input
-            type="text"
-            name="fname"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <br />
-          <label>Email:</label>
-          <br />
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <label>Roll No:</label>
-          <br />
-          <input
-            type="text"
-            name="rollno"
-            value={roll}
-            onChange={(e) => setRoll(e.target.value)}
-          />
-          <br />
-          <br />
-          <button onClick={handleSubmit}>Submit</button>
-        </form>
-      </div>
-    </>
+    <div className="App">
+      <form>
+        <label>Name:</label>
+        <br />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <br />
+        <label>Email:</label>
+        <br />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <br />
+        <label>Roll No:</label>
+        <br />
+        <input
+          type="text"
+          name="roll"
+          value={formData.roll}
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
+    </div>
   );
 }
 
